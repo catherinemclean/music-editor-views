@@ -1,85 +1,54 @@
 package cs3500.music.view;
 
-import cs3500.music.model.*;
+import java.util.Set;
 
+import cs3500.music.model.Playable;
 
 /**
- * An adapter that adds additional functionality to our model.
+ * Created by sean on 11/23/15.
  */
-public interface ViewModel extends Model, View {
+public interface ViewModel {
+  /**
+   * Determines if this piece contains the given playable
+   * @param playable the playable to check
+   * @return whether or not this piece contains the given playable
+   */
+  boolean hasPlayable(Playable playable);
 
   /**
-   * Sends in the location of the mouse click to set the current Note that is being
-   * selected.
+   * Gets the playables at the given beat
    *
-   * @param x The x coordinate of the mouse click.
-   * @param y The y coordinate of the mouse click.
+   * @param beat the beat to get the playables at
+   * @return the playables at the given beat
+   * @throws IllegalArgumentException if beat < 0 or beat > the last beat of the piece
    */
-  void setCurrent(int x, int y);
+  Set<Playable> getPlayablesAt(int beat);
 
   /**
-   * Gets the pitch of the note that is currently selected.
+   * Get the lowest pitch of this piece
    *
-   * @return The value of the pitch of the note that is currently selected.
+   * @return the lowest pitch of this piece
    */
-  int getCurPitch();
+  int getLowestPitch();
 
   /**
-   * Gets the beat of the note that is currently selected.
+   * Get the highest pitch of this piece
    *
-   * @return The beat of the note that is currently selected.
+   * @return the highest pitch of this piece
    */
-  int getCurBeat();
+  int getHighestPitch();
 
   /**
-   * Gets the instrument of the note that is currently selected.
+   * Get the last beat of this piece
    *
-   * @return The instrument of the note that is currently selected.
+   * @return the last beat of this piece
    */
-  int getCurInstrument();
+  int getLastBeat();
 
   /**
-   * Saves the pitch of the current note.
+   * Gets the tempo for this piece.
    *
-   * @param pitch The pitch of the note that is currently selected.
+   * @return the tempo for this piece
    */
-  void setCurPitch(int pitch);
-
-  /**
-   * Saves the beat of the current note.
-   *
-   * @param beat The beat of the note that is currently selected.
-   */
-  void setCurBeat(int beat);
-
-  /**
-   * Saves the instrument of the current note.
-   *
-   * @param instrument The instrument of the note that is currently selected.
-   */
-  void setCurInstrument(int instrument);
-
-  /**
-   * Gets the current timestamp of the piece
-   *
-   * @return the current timestamp
-   */
-  int getTimeStamp();
-
-  /**
-   * Advance the timestamp of this piece by 1;
-   */
-  void advanceTimestamp();
-
-  /**
-   * Sets the timestamp of this piece of this piece to the given timestamp
-   *
-   * @param t the new timestamp
-   */
-  void setTimeStamp(int t);
-
-  /**
-   * Resets the timestamp of this piece to 0
-   */
-  void resetTimestamp();
+  int getTempo();
 }
