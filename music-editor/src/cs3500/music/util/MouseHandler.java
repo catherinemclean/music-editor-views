@@ -1,4 +1,4 @@
-package cs3500.music.controller;
+package cs3500.music.util;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

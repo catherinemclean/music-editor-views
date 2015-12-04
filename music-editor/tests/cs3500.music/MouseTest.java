@@ -1,6 +1,6 @@
 package cs3500.music;
 
-import cs3500.music.controller.MouseHandler;
+import cs3500.music.util.MouseHandler;
 import cs3500.music.view.GuiViewFrame;
 import org.junit.Test;
 import java.awt.*;
