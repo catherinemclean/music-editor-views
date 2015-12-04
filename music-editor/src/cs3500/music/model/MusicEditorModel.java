@@ -11,10 +11,6 @@ public interface MusicEditorModel {
 
   Set<Playable> getPlayablesAt(int beat);
 
-  int getLowestPitch();
-
-  int getHighestPitch();
-
   int getLastBeat();
 
   int getTempo();
