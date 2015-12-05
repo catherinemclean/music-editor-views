@@ -92,7 +92,6 @@ public final class Controller implements MusicEditorController {
    */
   public void initialize() throws InvalidMidiDataException {
     this.view.render(model);
-    this.playing = true;
   }
 
   /**
@@ -108,8 +107,6 @@ public final class Controller implements MusicEditorController {
         model.setCurPitch(-1);
         model.setCurBeat(-1);
       }
-      //view.render(model);
-      view.update(beat);
     }
   }
 
@@ -131,7 +128,7 @@ public final class Controller implements MusicEditorController {
           //do nothing, if no note was found
         }
       }
-      view.render(model);
+      //view.render(model);
     }
   }
 
@@ -151,7 +148,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
+      //view.render(model);
     }
   }
 
@@ -176,7 +173,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
+      //view.render(model);
     }
   }
 
@@ -192,15 +189,14 @@ public final class Controller implements MusicEditorController {
       int instrument = model.getCurInstrument();
       Note n;
       try {
-        n = model.getNoteIn(new PitchImpl(pitch), beat, instrument);
+        n = model.getNoteIn(new PitchImpl(pitch), beat);
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
         return;
       }
       try {
         try {
-          model
-              .getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), instrument);
+          model.getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), instrument);
         } catch (Model.IllegalAccessNoteException ex) {
           if (pitch != 0) {
             model.addNote(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(),
@@ -212,7 +208,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
+      //view.render(model);
     }
   }
 
@@ -248,7 +244,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
+      //view.render(model);
     }
   }
 
@@ -284,7 +280,7 @@ public final class Controller implements MusicEditorController {
 
     public void run() {
       playing = true;
-      view.render(model);
+      //view.render(model);
     }
 
   }
@@ -326,7 +322,7 @@ public final class Controller implements MusicEditorController {
             model.addNote(new PitchImpl(pitch), n.getStartTime() - 1, n.getEndTime() - 1,
                 n.getInstrument(), n.getVelocity());
             model.setCurBeat(n.getEndTime() - 2);
-            view.render(model);
+            //view.render(model);
           }
         }
       } catch (Model.IllegalAddException ex) {
@@ -363,7 +359,7 @@ public final class Controller implements MusicEditorController {
           model.addNote(new PitchImpl(pitch), n.getStartTime() + 1, n.getEndTime() + 1,
               n.getInstrument(), n.getVelocity());
           model.setCurBeat(n.getEndTime());
-          view.render(model);
+          //view.render(model);
         }
       } catch (Model.IllegalAddException ex) {
         //do nothing
