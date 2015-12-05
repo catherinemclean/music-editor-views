@@ -128,7 +128,6 @@ public final class Controller implements MusicEditorController {
           //do nothing, if no note was found
         }
       }
-      //view.render(model);
     }
   }
 
@@ -148,7 +147,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      //view.render(model);
     }
   }
 
@@ -173,7 +171,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      //view.render(model);
     }
   }
 
@@ -189,14 +186,15 @@ public final class Controller implements MusicEditorController {
       int instrument = model.getCurInstrument();
       Note n;
       try {
-        n = model.getNoteIn(new PitchImpl(pitch), beat);
+        n = model.getNoteIn(new PitchImpl(pitch), beat, instrument);
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
         return;
       }
       try {
         try {
-          model.getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), instrument);
+          model
+              .getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), instrument);
         } catch (Model.IllegalAccessNoteException ex) {
           if (pitch != 0) {
             model.addNote(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(),
@@ -208,7 +206,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      //view.render(model);
     }
   }
 
@@ -244,7 +241,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      //view.render(model);
     }
   }
 
@@ -255,7 +251,6 @@ public final class Controller implements MusicEditorController {
   public class Record extends TimerTask {
 
     public void run() {
-      System.out.println("timer\n");
       if (playing && model.getTimeStamp() < model.getFinalEndBeat()) {
         //view.render(model);
         view.update(model.getTimeStamp());
@@ -280,7 +275,6 @@ public final class Controller implements MusicEditorController {
 
     public void run() {
       playing = true;
-      //view.render(model);
     }
 
   }

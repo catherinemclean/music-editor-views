@@ -386,21 +386,19 @@ public class GuiViewModel implements ViewModel {
    * @param y The y coordinate of the mouse click.
    */
   public void setCurrent(int x, int y) {
-    this.curBeat = (x >= 50 && x <= (this.model.getFinalEndBeat() + 2) * Constants.CELL_SIZE) ?
-        (x - 50) / Constants.CELL_SIZE :
-        -1;
+    this.curBeat = (x >= Constants.CELL_SIZE && x <= (this.model.getFinalEndBeat() + 2)
+        * Constants.CELL_SIZE) ? (x - Constants.CELL_SIZE - 10) / Constants.CELL_SIZE : -1;
     this.curPitch =
-        (y >= 25 && y <= ((this.model.getHighPitch().getValue() - this.model.getLowPitch().getValue() + 2)
-            * Constants.CELL_SIZE)) ?
+        (y >= Constants.CELL_SIZE && y <= ((this.model.getHighPitch().getValue() -
+            this.model.getLowPitch().getValue() + 2) * Constants.CELL_SIZE)) ?
             this.model.getHighPitch().getValue() - ((y - Constants.CELL_SIZE)
-                / Constants.CELL_SIZE) :
-            -1;
+                / Constants.CELL_SIZE) : -1;
     try {
       this.curInstrument = this.model.getNoteIn(new PitchImpl(curPitch), curBeat).getInstrument();
     } catch (Model.IllegalAccessNoteException ex) {
       this.curInstrument = -1;
     }
-    System.out.println("ran");
+    System.out.println("beat: " + curBeat + "  pitch: " + curPitch);
   }
 
   /**
