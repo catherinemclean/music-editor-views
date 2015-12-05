@@ -56,7 +56,7 @@ public final class Controller implements MusicEditorController {
     this.playing = false;
 
     // record the next few notes to be played
-    int t = model.getTempo() / 1000;
+    int t = model.getTempo() / 500;
     timer.schedule(new Record(), 0, t);
 
     // Ads our key events to our key handler
@@ -90,7 +90,7 @@ public final class Controller implements MusicEditorController {
    */
   public void initialize() throws InvalidMidiDataException {
     this.view.render(model);
-    this.playing = true;
+    //this.playing = true;
   }
 
   /**
@@ -106,7 +106,7 @@ public final class Controller implements MusicEditorController {
         model.setCurPitch(-1);
         model.setCurBeat(-1);
       }
-      view.render(model);
+      //view.render(model);
       view.update(beat);
     }
   }
@@ -259,7 +259,6 @@ public final class Controller implements MusicEditorController {
     public void run() {
       System.out.println("timer\n");
       if (playing && model.getTimeStamp() < model.getFinalEndBeat()) {
-        view.render(model);
         view.update(model.getTimeStamp());
         model.advanceTimestamp();
         /*try {

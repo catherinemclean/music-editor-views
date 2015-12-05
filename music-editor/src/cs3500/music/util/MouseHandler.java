@@ -38,7 +38,7 @@ public final class MouseHandler implements MouseListener {
    */
   @Override public void mouseClicked(MouseEvent e) {
     //TODO: fix this, don't just delete it
-    //view.setCurrent(e.getX(), e.getY());
+    view.setCurrent(e.getX(), e.getY());
     String msg = "Clicked at x:" + e.getX() + " y:" + e.getY() + "\n";
 
     // resize our StringBuilder to double capacity
