@@ -11,6 +11,10 @@ public interface MusicEditorModel extends Model {
 
   Set<Playable> getPlayablesAt(int beat);
 
+  int getHighestPitch();
+
+  int getLowestPitch();
+
   int getLastBeat();
 
   int getTempo();

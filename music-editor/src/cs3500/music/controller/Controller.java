@@ -104,7 +104,7 @@ public final class Controller implements MusicEditorController {
         model.setCurPitch(-1);
         model.setCurBeat(-1);
       }
-      view.paintAgain(playing);
+      view.render(model);
     }
   }
 
@@ -126,7 +126,7 @@ public final class Controller implements MusicEditorController {
           //do nothing, if no note was found
         }
       }
-      view.paintAgain(playing);
+      view.render(model);
     }
   }
 
@@ -146,7 +146,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.paintAgain(playing);
+      view.render(model);
     }
   }
 
@@ -171,7 +171,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.paintAgain(playing);
+      view.render(model);
     }
   }
 
@@ -207,7 +207,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.paintAgain(playing);
+      view.render(model);
     }
   }
 
@@ -243,7 +243,7 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.paintAgain(playing);
+      view.render(model);
     }
   }
 
@@ -255,7 +255,7 @@ public final class Controller implements MusicEditorController {
 
     public void run() {
       if (playing && model.getTimeStamp() < model.getFinalEndBeat()) {
-        view.paintAgain(playing);
+        view.render(model);
         try {
           view.recordNotes(model.getTimeStamp());
         } catch (InvalidMidiDataException e) {

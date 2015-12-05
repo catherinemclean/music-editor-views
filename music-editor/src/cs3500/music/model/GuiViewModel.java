@@ -85,8 +85,8 @@ public class GuiViewModel implements ViewModel {
    *
    * @return the lowest pitch
    */
-  @Override public Pitch getLowestPitch() {
-    return m.getLowestPitch();
+  @Override public int getLowestPitch() {
+    return model.getLowestPitch();
   }
 
   /**
@@ -94,9 +94,28 @@ public class GuiViewModel implements ViewModel {
    *
    * @return the highest pitch
    */
-  @Override public Pitch getHighestPitch() {
-    return m.getHighestPitch();
+  @Override public int getHighestPitch() {
+    return model.getHighestPitch();
   }
+
+  /**
+   * Gets the lowest pitch of the piece.
+   *
+   * @return the lowest pitch
+   */
+  @Override public Pitch getLowPitch() {
+    return m.getLowPitch();
+  }
+
+  /**
+   * Gets the highest pitch of the piece.
+   *
+   * @return the highest pitch
+   */
+  @Override public Pitch getHighPitch() {
+    return m.getHighPitch();
+  }
+
 
   @Override public int getLastBeat() {
     return 0;
@@ -346,9 +365,9 @@ public class GuiViewModel implements ViewModel {
         (x - 50) / Constants.CELL_SIZE :
         -1;
     this.curPitch =
-        (y >= 25 && y <= ((m.getHighestPitch().getValue() - m.getLowestPitch().getValue() + 2)
+        (y >= 25 && y <= ((m.getHighPitch().getValue() - m.getLowPitch().getValue() + 2)
             * Constants.CELL_SIZE)) ?
-            m.getHighestPitch().getValue() - ((y - Constants.CELL_SIZE)
+            m.getHighPitch().getValue() - ((y - Constants.CELL_SIZE)
                 / Constants.CELL_SIZE) :
             -1;
     try {
@@ -391,7 +410,7 @@ public class GuiViewModel implements ViewModel {
    * @param pitch The pitch of the note that is currently selected.
    */
   public void setCurPitch(int pitch) {
-    if (pitch < getLowestPitch().getValue() && pitch > getHighestPitch().getValue() &&
+    if (pitch < getLowPitch().getValue() && pitch > getHighPitch().getValue() &&
         pitch != -1) {
       throw new IllegalArgumentException("Pitch out of range!");
     }

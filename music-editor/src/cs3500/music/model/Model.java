@@ -23,14 +23,14 @@ public interface Model {
    *
    * @return the lowest pitch
    */
-  Pitch getLowestPitch();
+  Pitch getLowPitch();
 
   /**
    * Gets the highest pitch of the piece.
    *
    * @return the highest pitch
    */
-  Pitch getHighestPitch();
+  Pitch getHighPitch();
 
   /**
    * Gets the final beat of the piece.
