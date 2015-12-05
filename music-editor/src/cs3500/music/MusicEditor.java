@@ -41,12 +41,6 @@ public final class MusicEditor {
     // Reads and parses the file and saves the info to the model
     BufferedReader f = new BufferedReader(new FileReader(file));
     MusicEditorModel m = MusicReader.parseFile(f, new MusicModelBuilder());
-    for (int i = 0; i < 64; i++) {
-      for (Playable p : m.getPlayablesAt(i)) {
-        System.out.println("Pitch: " + p.getPitch() + "  start: " + p.getStart() +
-        "  end: " + p.getEnd());
-      }
-    }
 
    // MusicEditorView v = new ViewBuilderImpl().setModel(m).setView(args[1]).build();
     //v.render(m);

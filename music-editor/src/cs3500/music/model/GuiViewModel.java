@@ -400,6 +400,7 @@ public class GuiViewModel implements ViewModel {
     } catch (Model.IllegalAccessNoteException ex) {
       this.curInstrument = -1;
     }
+    System.out.println("ran");
   }
 
   /**
