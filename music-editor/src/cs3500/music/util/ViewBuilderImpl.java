@@ -2,6 +2,9 @@ package cs3500.music.util;
 
 import cs3500.music.model.*;
 import cs3500.music.view.*;
+import cs3500.music.view.consoleui.ConsoleView;
+import cs3500.music.view.midiui.MIDIView;
+import cs3500.music.view.swingview.SwingView;
 
 import javax.sound.midi.InvalidMidiDataException;
 
@@ -15,19 +18,19 @@ public final class ViewBuilderImpl implements ViewBuilder {
   /**
    * The view of this builder
    */
-  private View v;
+  private MusicEditorView v;
 
   /**
    * The model of this builder
    */
-  private Model m;
+  private MusicEditorModel m;
 
   /**
    * Builds a new view with this builder's current specifications
    *
    * @return A new View depending on this ViewBuilder's specifications
    */
-  @Override public View build() {
+  @Override public MusicEditorView build() {
     return v;
   }
 
@@ -37,7 +40,7 @@ public final class ViewBuilderImpl implements ViewBuilder {
    * @param m the model to set this builder to
    * @return this builder with the current model set to the given model
    */
-  @Override public ViewBuilder setModel(Model m) {
+  @Override public ViewBuilder setModel(MusicEditorModel m) {
     this.m = m;
     return this;
   }
@@ -52,17 +55,19 @@ public final class ViewBuilderImpl implements ViewBuilder {
   @Override public ViewBuilder setView(String s) throws InvalidMidiDataException {
     switch (s) {
       case "console":
-        this.v = new ConsoleView(new ModelToViewImpl(m));
+        ConsoleView.Builder b = new ConsoleView.Builder();
+        this.v = b.build();
+        //this.v = new ConsoleView(new ModelToViewImpl(m));
         return this;
       case "visual":
-        this.v = new GuiViewFrame(new GuiViewModel(m));
+        this.v = new SwingView();
         return this;
       case "midi":
-        this.v = new MidiViewImpl(m);
+        this.v = new MIDIView();
         return this;
-      case "composite":
+      /*case "composite":
         this.v = new CompositeView(new MidiViewImpl(m), new GuiViewFrame(new GuiViewModel(m)));
-        return this;
+        return this;*/
       default:
         throw new IllegalArgumentException("Invalid view");
     }
@@ -73,8 +78,8 @@ public final class ViewBuilderImpl implements ViewBuilder {
    *
    * @return this builder
    */
-  public ViewBuilder setTesting() throws InvalidMidiDataException {
+  /*public ViewBuilder setTesting() throws InvalidMidiDataException {
     this.v = new MidiViewImpl(m, true);
     return this;
-  }
+  }*/
 }

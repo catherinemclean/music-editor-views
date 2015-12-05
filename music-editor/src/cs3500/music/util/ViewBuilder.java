@@ -1,7 +1,7 @@
 package cs3500.music.util;
 
 import cs3500.music.model.*;
-import cs3500.music.view.View;
+import cs3500.music.view.MusicEditorView;
 
 import javax.sound.midi.InvalidMidiDataException;
 
@@ -16,7 +16,7 @@ public interface ViewBuilder {
    *
    * @return A new View depending on this ViewBuilder's specifications
    */
-  View build();
+  MusicEditorView build();
 
   /**
    * Sets the model of this ViewBuilder to the given model
@@ -24,7 +24,7 @@ public interface ViewBuilder {
    * @param m the model to set this builder to
    * @return this builder with the current model set to the given model
    */
-  ViewBuilder setModel(Model m);
+  ViewBuilder setModel(MusicEditorModel m);
 
   /**
    * Sets the view of this ViewBuilder to the appropriate view, based on
@@ -40,5 +40,5 @@ public interface ViewBuilder {
    *
    * @return this builder
    */
-  ViewBuilder setTesting() throws InvalidMidiDataException;
+  //ViewBuilder setTesting() throws InvalidMidiDataException;
 }

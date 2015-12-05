@@ -18,4 +18,6 @@ public interface MusicEditorModel {
   int getLastBeat();
 
   int getTempo();
+
+  void addNote(int pitch, int start, int end, int instrument, int volume);
 }
