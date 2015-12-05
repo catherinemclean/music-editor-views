@@ -24,7 +24,7 @@ public final class Controller implements MusicEditorController {
   /**
    * The model that our composite view will work with.
    */
-  private final ViewModel model;
+  private final cs3500.music.model.ViewModel model;
 
   /**
    * The timer that will schedule all of our tasks, such as recording notes
@@ -70,13 +70,13 @@ public final class Controller implements MusicEditorController {
     this.kh.addTypedEvent(47, new Pause()); //            '/'
     this.kh.addTypedEvent(77, new MoveNoteRight()); //    'm'
     this.kh.addTypedEvent(78, new MoveNoteLeft()); //     'n'
-    this.kh.addPressedEvent(37, new MoveScreenLeft()); // 'left'
+   /* this.kh.addPressedEvent(37, new MoveScreenLeft()); // 'left'
     this.kh.addPressedEvent(38, new MoveScreenUp()); //   'up'
     this.kh.addPressedEvent(39, new MoveScreenRight()); //'right'
     this.kh.addPressedEvent(40, new MoveScreenDown()); // 'down
     this.kh.addTypedEvent(71, new ToEnd()); //            'g'
     this.kh.addTypedEvent(72, new ToHome()); //           'h'
-    this.kh.addTypedEvent(84, kh.new TestKeyHandler());// 't'
+    this.kh.addTypedEvent(84, kh.new TestKeyHandler());// 't'*/
 
     // adds the key handler to the view
     this.view.addKeyListener(this.kh);
@@ -256,14 +256,14 @@ public final class Controller implements MusicEditorController {
     public void run() {
       if (playing && model.getTimeStamp() < model.getFinalEndBeat()) {
         view.render(model);
-        try {
+        /*try {
           view.recordNotes(model.getTimeStamp());
         } catch (InvalidMidiDataException e) {
           e.printStackTrace();
         } catch (MidiUnavailableException e) {
           e.printStackTrace();
         }
-        model.advanceTimestamp();
+        model.advanceTimestamp();*/
       }
     }
   }
@@ -276,7 +276,7 @@ public final class Controller implements MusicEditorController {
 
     public void run() {
       playing = true;
-      view.paintAgain(playing);
+      view.render(model);
     }
 
   }
@@ -288,7 +288,7 @@ public final class Controller implements MusicEditorController {
   public class Pause implements Runnable {
     public void run() {
       playing = false;
-      view.pause();
+      //view.pause();
     }
   }
 
@@ -318,7 +318,7 @@ public final class Controller implements MusicEditorController {
             model.addNote(new PitchImpl(pitch), n.getStartTime() - 1, n.getEndTime() - 1,
                 n.getInstrument(), n.getVelocity());
             model.setCurBeat(n.getEndTime() - 2);
-            view.paintAgain(playing);
+            view.render(model);
           }
         }
       } catch (Model.IllegalAddException ex) {
@@ -355,7 +355,7 @@ public final class Controller implements MusicEditorController {
           model.addNote(new PitchImpl(pitch), n.getStartTime() + 1, n.getEndTime() + 1,
               n.getInstrument(), n.getVelocity());
           model.setCurBeat(n.getEndTime());
-          view.paintAgain(playing);
+          view.render(model);
         }
       } catch (Model.IllegalAddException ex) {
         //do nothing
@@ -371,43 +371,43 @@ public final class Controller implements MusicEditorController {
   /**
    * Jumps this piece to the very first beat.
    */
-  public class ToHome implements Runnable {
+ /* public class ToHome implements Runnable {
     public void run() {
       playing = false;
       view.skipToFront();
       model.setTimeStamp(0);
       view.paintAgain(playing);
     }
-  }
+  }*/
 
 
   /**
    * Jumps this piece to the very last beat.
    */
-  public class ToEnd implements Runnable {
+/*  public class ToEnd implements Runnable {
     public void run() {
       view.skipToEnd();
       model.setTimeStamp(model.getFinalEndBeat());
       view.paintAgain(playing);
     }
-  }
+  }*/
 
 
   /**
    * Shift the viewable range of this piece to the left.
    */
-  public class MoveScreenLeft implements Runnable {
+ /* public class MoveScreenLeft implements Runnable {
 
     public void run() {
       view.shiftLeft();
     }
-  }
+  }*/
 
 
   /**
    * Shift the viewable range of this piece to the right.
    */
-  public class MoveScreenRight implements Runnable {
+ /* public class MoveScreenRight implements Runnable {
 
     public void run() {
       view.shiftRight();
@@ -418,7 +418,7 @@ public final class Controller implements MusicEditorController {
   /**
    * Shift the viewable range of this piece up.
    */
-  public class MoveScreenUp implements Runnable {
+ /* public class MoveScreenUp implements Runnable {
 
     public void run() {
       view.shiftUp();
@@ -429,10 +429,10 @@ public final class Controller implements MusicEditorController {
   /**
    * Shift the viewable range of this piece down.
    */
-  public class MoveScreenDown implements Runnable {
+ /* public class MoveScreenDown implements Runnable {
 
     public void run() {
       view.shiftDown();
     }
-  }
+  }*/
 }

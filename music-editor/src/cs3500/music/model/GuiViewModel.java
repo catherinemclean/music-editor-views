@@ -211,6 +211,15 @@ public class GuiViewModel implements ViewModel {
     }
   }
 
+  @Override public void addNote(int pitch, int startTime, int endTime, int instrument,
+      int velocity) {
+    try {
+      m.addNote(new PitchImpl(pitch), startTime, endTime, instrument, velocity);
+    } catch (Model.IllegalAddException ex) {
+      //do nothing
+    }
+  }
+
   /**
    * Gets the note at the specified starttime and pitch
    *
