@@ -50,7 +50,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
 
   @Override
   public int getHighestPitch() {
-    return this.model.getLowPitch().getValue();
+    return this.model.getHighPitch().getValue();
   }
 
   /**

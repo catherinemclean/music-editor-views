@@ -14,7 +14,7 @@ public final class MouseHandler implements MouseListener {
   /**
    * Represents the view with which the mouse events will interact.
    */
-  private GuiView view;
+  private cs3500.music.model.ViewModel view;
 
   /**
    * Represents mock output, for testing purposes.
@@ -26,7 +26,7 @@ public final class MouseHandler implements MouseListener {
    *
    * @param view the view to use
    */
-  public MouseHandler(GuiView view) {
+  public MouseHandler(cs3500.music.model.ViewModel view) {
     this.view = view;
     this.out = new StringBuilder(1000);
   }
@@ -37,8 +37,7 @@ public final class MouseHandler implements MouseListener {
    * @param e the MouseEvent representing the user's click.
    */
   @Override public void mouseClicked(MouseEvent e) {
-    //TODO: fix this, don't just delete it
-    //view.setCurrent(e.getX(), e.getY());
+    view.setCurrent(e.getX(), e.getY());
     String msg = "Clicked at x:" + e.getX() + " y:" + e.getY() + "\n";
 
     // resize our StringBuilder to double capacity

@@ -1,6 +1,7 @@
 package cs3500.music.controller;
 
 import cs3500.music.model.ViewModel;
+import cs3500.music.util.MouseHandler;
 import cs3500.music.view.*;
 import cs3500.music.model.*;
 import cs3500.music.view.compositeui.CompositeView;
@@ -51,6 +52,7 @@ public final class Controller implements MusicEditorController {
   public Controller(Model m) throws InvalidMidiDataException {
     this.model = new GuiViewModel(m);
     this.view = new CompositeView(new SwingView(), new MIDIView());
+    this.view.addMouseListener(new MouseHandler(model));
     this.kh = new KeyboardHandler();
     //this.timer = new Timer();
     this.playing = false;
@@ -90,7 +92,6 @@ public final class Controller implements MusicEditorController {
    */
   public void initialize() throws InvalidMidiDataException {
     this.view.render(model);
-    this.playing = true;
   }
 
   /**
@@ -257,9 +258,8 @@ public final class Controller implements MusicEditorController {
   public class Record extends TimerTask {
 
     public void run() {
-      System.out.println("timer\n");
       if (playing && model.getTimeStamp() < model.getFinalEndBeat()) {
-        view.render(model);
+        //view.render(model);
         view.update(model.getTimeStamp());
         model.advanceTimestamp();
         /*try {
