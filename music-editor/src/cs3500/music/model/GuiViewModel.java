@@ -117,7 +117,7 @@ public class GuiViewModel implements ViewModel {
 
 
   @Override public int getLastBeat() {
-    return model.getLastBeat();
+    return this.model.getLastBeat();
   }
 
   /**
@@ -210,10 +210,27 @@ public class GuiViewModel implements ViewModel {
     }
   }
 
+  /**
+   * Adds a note to the music sheet at the given pitch and startTime
+   * Updates this.lowestPitch, this.highestPitch, and this.finalBeat
+   *
+   * @param pitch      the pitch of the new note
+   * @param startTime  the start time of the new note
+   * @param endTime    The end time of the new note
+   * @param instrument The instrument that plays the new note
+   * @param velocity   the velocity (volume of the new note
+   * @throws Model.IllegalAddException      if a note already exists at the given start time and
+   *                                  pitch. Notes are allowed to be inserted over continuations
+   *                                  of notes, because this can
+   *                                  happen in choirs or with different instruments.
+   * @throws IllegalArgumentException if any inputs are less than 0, or if endTime is less
+   *                                  than or equal to startTime, or if velocity or instrument
+   *                                  is not within [0, 127]
+   */
   @Override public void addNote(int pitch, int startTime, int endTime, int instrument,
       int velocity) {
     try {
-      model.addNote(new PitchImpl(pitch), startTime, endTime, instrument, velocity);
+      this.model.addNote(new PitchImpl(pitch), startTime, endTime, instrument, velocity);
     } catch (Model.IllegalAddException ex) {
       //do nothing
     }

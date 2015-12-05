@@ -1,9 +1,6 @@
 package cs3500.music.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by catherinemclean1 on 12/4/15.
