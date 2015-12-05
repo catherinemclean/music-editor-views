@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Created by catherinemclean1 on 12/4/15.
  */
-public interface MusicEditorModel {
+public interface MusicEditorModel extends Model {
 
   boolean hasPlayable(Playable playable);
 
@@ -14,6 +14,10 @@ public interface MusicEditorModel {
   int getLastBeat();
 
   int getTempo();
+
+  int getLowestPitch();
+
+  int getHighestPitch();
 
   void addNote(int pitch, int start, int end, int instrument, int volume);
 }
