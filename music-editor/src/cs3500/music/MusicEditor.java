@@ -40,12 +40,18 @@ public final class MusicEditor {
 
     // Reads and parses the file and saves the info to the model
     BufferedReader f = new BufferedReader(new FileReader(file));
-    Model m = MusicReader.parseFile(f, new MusicModelBuilder());
+    MusicEditorModel m = MusicReader.parseFile(f, new MusicModelBuilder());
+
+    MusicEditorView v = new ViewBuilderImpl().setModel(m).setView(args[1]).build();
+    v.render(m);
+
+
+
 
     // Initializes the controller for our composite view.
-    Controller controller = new ControllerImpl(m);
+    //Controller controller = new ControllerImpl(m);
 
     // runs the view
-    controller.initialize();
+    //controller.initialize();
   }
 }

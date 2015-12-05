@@ -12,5 +12,5 @@ public interface ControllerInter {
    *
    * @throws InvalidMidiDataException if the midi data is invalid.
    */
-  void initialize() throws InvalidMidiDataException;
+  //void initialize() throws InvalidMidiDataException;
 }

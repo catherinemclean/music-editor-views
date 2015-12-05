@@ -1,25 +1,23 @@
 package cs3500.music.util;
 
-import cs3500.music.model.Model;
-import cs3500.music.model.ModelImpl;
-import cs3500.music.model.PitchImpl;
+import cs3500.music.model.*;
 
 /**
  * Builds a model for a music sheet
  */
-public final class MusicModelBuilder implements CompositionBuilder<Model> {
+public final class MusicModelBuilder implements CompositionBuilder<MusicEditorModel> {
 
   /**
    * Represents the model that will be built
    */
-  Model m = new ModelImpl();
+  MusicEditorModel m = new ModelToMusicEditorModelImpl(new ModelImpl());
 
   /**
    * Returns the model to be built
    *
    * @return the model we will use to build the music sheet
    */
-  @Override public Model build() {
+  @Override public MusicEditorModel build() {
     return m;
   }
 
@@ -29,8 +27,8 @@ public final class MusicModelBuilder implements CompositionBuilder<Model> {
    * @param tempo The speed, in microseconds per beat
    * @return this builder
    */
-  @Override public CompositionBuilder<Model> setTempo(int tempo) {
-    m.setTempo(tempo);
+  @Override public CompositionBuilder<MusicEditorModel> setTempo(int tempo) {
+    //m.setTempo(tempo);
     return this;
   }
 
@@ -45,9 +43,9 @@ public final class MusicModelBuilder implements CompositionBuilder<Model> {
    * @param volume     The volume (in the range [0, 127])
    * @return this builder
    */
-  @Override public CompositionBuilder<Model> addNote(int start, int end, int instrument, int pitch,
+  @Override public CompositionBuilder<MusicEditorModel> addNote(int start, int end, int instrument, int pitch,
       int volume) {
-    m.addNote(new PitchImpl(pitch), start, end, instrument, volume);
+    m.addNote(pitch, start, end, instrument, volume);
     return this;
   }
 }

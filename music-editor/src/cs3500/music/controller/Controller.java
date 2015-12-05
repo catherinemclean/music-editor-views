@@ -1,3 +1,4 @@
+
 package cs3500.music.controller;
 
 import cs3500.music.view.*;
@@ -11,43 +12,57 @@ import javax.sound.midi.MidiUnavailableException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 /**
  * Controls the interactions between Model and the Composite and Gui views.
  */
+
 public final class Controller implements ControllerInter {
 
-  /**
+
+/**
    * The composite view, a combination of midi and gui views.
-   */
+   *//*
+
   private final GuiView view;
 
-  /**
+  */
+/**
    * The model that our composite view will work with.
-   */
+   *//*
+
   private final ViewModel model;
 
-  /**
+  */
+/**
    * The timer that will schedule all of our tasks, such as recording notes
    * to be played.
    */
-  public static Timer timer;
 
-  /**
+  public static Timer timer = new Timer();
+
+/**
    * Represents whether or not this view is currently in playback mode.
-   */
+   *//*
+
   private boolean playing;
 
-  /**
+  */
+/**
    * The Keyboard handler, deals with key events.
-   */
+   *//*
+
   private final KeyboardHandler kh;
 
-  /**
+  */
+/**
    * Makes a new Controller with the given view.
    *
    * @param m The composite view that this controller will control
-   */
-  public ControllerImpl(Model m) throws InvalidMidiDataException {
+   *//*
+
+  */
+/*public Controller(Model m) throws InvalidMidiDataException {
     this.model = new GuiViewModel(m);
     this.view = new CompositeView(new SwingView(), new MIDIView());
     this.kh = new KeyboardHandler();
@@ -81,19 +96,27 @@ public final class Controller implements ControllerInter {
     // adds the key handler to the view
     this.view.addListener(this.kh);
   }
+  *//*
 
-  /**
+
+  */
+/**
    * Initializes this controller by initializing the view.
    *
    * @throws InvalidMidiDataException if the Midi data is invalid
-   */
-  public void initialize() throws InvalidMidiDataException {
-    this.view.initialize();
-  }
+   *//*
 
-  /**
+  */
+/*public void initialize() throws InvalidMidiDataException {
+    this.view.initialize();
+  }*//*
+
+
+  */
+/**
    * Adds a new note with a length of 2, starting at the current beat and pitch.
-   */
+   *//*
+
   public class AddNewNote implements Runnable {
 
     public void run() {
@@ -109,9 +132,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Deletes the note, if there exists one, at the current beat and pitch.
-   */
+   *//*
+
   public class DeleteNote implements Runnable {
 
     public void run() {
@@ -131,9 +156,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Extends the length of the selected note, if there is one, by one beat.
-   */
+   *//*
+
   public class ExtendNote implements Runnable {
 
     public void run() {
@@ -151,9 +178,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Shortens the length of the selected note, if there is one, by one beat.
-   */
+   *//*
+
   public class ShortenNote implements Runnable {
 
     public void run() {
@@ -176,9 +205,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Lowers the pitch of the selected note, if there is one, by one half step.
-   */
+   *//*
+
   public class LowerNote implements Runnable {
 
     public void run() {
@@ -212,9 +243,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Raises the pitch of the selected note, if there is one, by one half step.
-   */
+   *//*
+
   public class RaiseNote implements Runnable {
 
     public void run() {
@@ -248,9 +281,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Sends the notes at the model's current time stamp to be played immediately.
-   */
+   *//*
+
   public class Record extends TimerTask {
 
     public void run() {
@@ -269,9 +304,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Starts playback of the song.
-   */
+   *//*
+
   public class Play implements Runnable {
 
     public void run() {
@@ -282,9 +319,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Pauses playback of the song.
-   */
+   *//*
+
   public class Pause implements Runnable {
     public void run() {
       playing = false;
@@ -293,9 +332,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Move the selected note, if there is one, to the left by one beat.
-   */
+   *//*
+
   public class MoveNoteLeft implements Runnable {
     public void run() {
       int pitch = model.getCurPitch();
@@ -332,9 +373,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Move the selected note, if there is one, to the right by one beat.
-   */
+   *//*
+
   public class MoveNoteRight implements Runnable {
     public void run() {
       int pitch = model.getCurPitch();
@@ -368,9 +411,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Jumps this piece to the very first beat.
-   */
+   *//*
+
   public class ToHome implements Runnable {
     public void run() {
       playing = false;
@@ -381,9 +426,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Jumps this piece to the very last beat.
-   */
+   *//*
+
   public class ToEnd implements Runnable {
     public void run() {
       view.skipToEnd();
@@ -393,9 +440,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Shift the viewable range of this piece to the left.
-   */
+   *//*
+
   public class MoveScreenLeft implements Runnable {
 
     public void run() {
@@ -404,9 +453,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Shift the viewable range of this piece to the right.
-   */
+   *//*
+
   public class MoveScreenRight implements Runnable {
 
     public void run() {
@@ -415,9 +466,11 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Shift the viewable range of this piece up.
-   */
+   *//*
+
   public class MoveScreenUp implements Runnable {
 
     public void run() {
@@ -426,13 +479,17 @@ public final class Controller implements ControllerInter {
   }
 
 
-  /**
+  */
+/**
    * Shift the viewable range of this piece down.
-   */
+   *//*
+
   public class MoveScreenDown implements Runnable {
 
     public void run() {
       view.shiftDown();
     }
   }
+*/
 }
+
