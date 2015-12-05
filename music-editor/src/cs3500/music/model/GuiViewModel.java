@@ -156,10 +156,6 @@ public class GuiViewModel implements ViewModel {
     return this.model.getTempo();
   }
 
-  @Override public void addNote(int pitch, int start, int end, int instrument, int volume) {
-    this.model.addNote(pitch, start, end, instrument, volume);
-  }
-
   /**
    * Sets the tempo of this piece to the given tempo.
    *
@@ -217,7 +213,7 @@ public class GuiViewModel implements ViewModel {
   @Override public void addNote(int pitch, int startTime, int endTime, int instrument,
       int velocity) {
     try {
-      m.addNote(new PitchImpl(pitch), startTime, endTime, instrument, velocity);
+      model.addNote(new PitchImpl(pitch), startTime, endTime, instrument, velocity);
     } catch (Model.IllegalAddException ex) {
       //do nothing
     }

@@ -36,8 +36,8 @@ public final class ModelToViewImpl implements ModelToView {
    */
   public ModelToViewImpl(Model m) {
     this.model = Objects.requireNonNull(m);
-    this.highest = Objects.requireNonNull(model.getHighestPitch());
-    this.lowest = Objects.requireNonNull(model.getLowestPitch());
+    this.highest = Objects.requireNonNull(model.getHighPitch());
+    this.lowest = Objects.requireNonNull(model.getLowPitch());
     this.board = new NoteStatus[m.getFinalEndBeat()][highest.getValue() - lowest.getValue() + 1];
 
     this.build();
@@ -108,7 +108,7 @@ public final class ModelToViewImpl implements ModelToView {
    */
   public String printPitches() {
     String result = "    ";
-    for (int i = model.getLowestPitch().getValue(); i <= model.getHighestPitch().getValue(); i++) {
+    for (int i = model.getLowPitch().getValue(); i <= model.getHighPitch().getValue(); i++) {
       //Convert pitch to letter
       //all need three characters
       result += new PitchImpl(i).toString();
