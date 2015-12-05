@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Created by catherinemclean1 on 12/4/15.
  */
-public interface MusicEditorModel {
+public interface MusicEditorModel extends Model {
 
   boolean hasPlayable(Playable playable);
 

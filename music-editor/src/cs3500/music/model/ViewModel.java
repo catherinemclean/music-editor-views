@@ -6,7 +6,7 @@ import cs3500.music.model.*;
 /**
  * An adapter that adds additional functionality to our model.
  */
-public interface ViewModel extends MusicEditorModel, Model {
+public interface ViewModel extends MusicEditorModel {
 
   /**
    * Sends in the location of the mouse click to set the current Note that is being

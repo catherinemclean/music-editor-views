@@ -8,8 +8,8 @@ import cs3500.music.model.Playable;
 /**
  * A ViewModel for MusicEditor Models that has read-only .
  */
-public class ViewModelImpl { //implements ViewModel {
- /* private final MusicEditorModel model;
+public class ViewModelImpl implements ViewModel {
+  private final MusicEditorModel model;
 
 
   public ViewModelImpl(MusicEditorModel model) {
@@ -44,5 +44,5 @@ public class ViewModelImpl { //implements ViewModel {
   @Override
   public int getTempo() {
     return this.model.getTempo();
-  }*/
+  }
 }
