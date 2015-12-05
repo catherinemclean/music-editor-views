@@ -19,9 +19,5 @@ public interface MusicEditorModel extends Model {
 
   int getTempo();
 
-  int getLowestPitch();
-
-  int getHighestPitch();
-
   void addNote(int pitch, int start, int end, int instrument, int volume);
 }

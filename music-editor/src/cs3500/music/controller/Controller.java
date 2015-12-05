@@ -1,5 +1,6 @@
 package cs3500.music.controller;
 
+import cs3500.music.model.ViewModel;
 import cs3500.music.view.*;
 import cs3500.music.model.*;
 import cs3500.music.view.compositeui.CompositeView;

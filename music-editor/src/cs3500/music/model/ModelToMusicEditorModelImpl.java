@@ -57,12 +57,30 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
   }
 
   /**
+   * Gets the lowest pitch of the piece.
+   *
+   * @return the lowest pitch
+   */
+  @Override public Pitch getLowPitch() {
+    return this.model.getLowPitch();
+  }
+
+  /**
+   * Gets the highest pitch of the piece.
+   *
+   * @return the highest pitch
+   */
+  @Override public Pitch getHighPitch() {
+    return this.model.getHighPitch();
+  }
+
+  /**
    * Gets the final beat of the piece.
    *
    * @return the final beat
    */
   @Override public int getFinalStartBeat() {
-    return 0;
+    return this.model.getFinalStartBeat();
   }
 
   /**
@@ -71,7 +89,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    * @return the final end beat
    */
   @Override public int getFinalEndBeat() {
-    return 0;
+    return this.model.getFinalEndBeat();
   }
 
   /**
@@ -80,7 +98,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    * @return the measure of the piece.
    */
   @Override public int getMeasure() {
-    return 0;
+    return this.model.getMeasure();
   }
 
   @Override
@@ -99,7 +117,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    * @param tempo the new tempo of the piece.
    */
   @Override public void setTempo(int tempo) {
-
+    this.model.setTempo(tempo);
   }
 
   /**
@@ -109,7 +127,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    * @return the list of notes that should be played at the given time.
    */
   @Override public List<Note> getNotesAtTime(int time) {
-    return null;
+    return this.model.getNotesAtTime(time);
   }
 
   /**
@@ -119,7 +137,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    * @return the list of notes that should be turned off at the given time.
    */
   @Override public List<Note> getEndNotesAtTime(int time) {
-    return null;
+    return this.model.getEndNotesAtTime(time);
   }
 
   /**
@@ -141,7 +159,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    */
   @Override public void addNote(Pitch pitch, int startTime, int endTime, int instrument,
       int velocity) {
-
+    this.model.addNote(pitch, startTime, endTime, instrument, velocity);
   }
 
   /**
@@ -155,7 +173,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    *                                          there is no note at the given pitch and time.
    */
   @Override public Note getNoteAt(Pitch pitch, int time, int instrument) {
-    return null;
+    return this.model.getNoteAt(pitch, time, instrument);
   }
 
   /**
@@ -184,7 +202,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    *                                          at the given pitch and time
    */
   @Override public Note getNoteIn(Pitch pitch, int time) {
-    return null;
+    return this.model.getNoteIn(pitch, time);
   }
 
   /**
@@ -197,7 +215,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    *                                          given position.
    */
   @Override public void deleteNote(Pitch pitch, int time, int instrument) {
-
+    this.model.deleteNote(pitch, time, instrument);
   }
 
   /**
@@ -213,7 +231,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    */
   @Override public void editNoteStartTime(Pitch pitch, int currentStart, int newStart,
       int instrument) {
-
+    this.model.editNoteStartTime(pitch, currentStart, newStart, instrument);
   }
 
   /**
@@ -229,7 +247,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    */
   @Override public void editNoteEndTime(Pitch pitch, int currentStart, int newEnd,
       int instrument) {
-
+    this.model.editNoteEndTime(pitch, currentStart, newEnd, instrument);
   }
 
   /**

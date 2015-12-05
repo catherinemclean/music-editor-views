@@ -19,9 +19,9 @@ public class GuiViewModel implements ViewModel {
   /**
    * The model to add functionality to
    */
-  private ModelToMusicEditorModelImpl model;
+  private MusicEditorModel model;
 
-  private Model m;
+  //private Model m;
 
   /**
    * The current pitch that is selected
@@ -64,7 +64,6 @@ public class GuiViewModel implements ViewModel {
    */
   public GuiViewModel(Model m) {
     this.model = new ModelToMusicEditorModelImpl(m);
-    this.m = m;
     this.curPitch = -1;
     this.curBeat = -1;
     this.curInstrument = -1;
@@ -104,7 +103,7 @@ public class GuiViewModel implements ViewModel {
    * @return the lowest pitch
    */
   @Override public Pitch getLowPitch() {
-    return m.getLowPitch();
+    return this.model.getLowPitch();
   }
 
   /**
@@ -113,7 +112,7 @@ public class GuiViewModel implements ViewModel {
    * @return the highest pitch
    */
   @Override public Pitch getHighPitch() {
-    return m.getHighPitch();
+    return this.model.getHighPitch();
   }
 
 
@@ -127,7 +126,7 @@ public class GuiViewModel implements ViewModel {
    * @return the final beat
    */
   @Override public int getFinalStartBeat() {
-    return m.getFinalStartBeat();
+    return this.model.getFinalStartBeat();
   }
 
   /**
@@ -136,7 +135,7 @@ public class GuiViewModel implements ViewModel {
    * @return the final end beat
    */
   @Override public int getFinalEndBeat() {
-    return m.getFinalEndBeat();
+    return this.model.getFinalEndBeat();
   }
 
   /**
@@ -145,7 +144,7 @@ public class GuiViewModel implements ViewModel {
    * @return the measure of the piece
    */
   @Override public int getMeasure() {
-    return m.getMeasure();
+    return this.model.getMeasure();
   }
 
   /**
@@ -154,7 +153,11 @@ public class GuiViewModel implements ViewModel {
    * @return the tempo
    */
   @Override public int getTempo() {
-    return m.getTempo();
+    return this.model.getTempo();
+  }
+
+  @Override public void addNote(int pitch, int start, int end, int instrument, int volume) {
+    this.model.addNote(pitch, start, end, instrument, volume);
   }
 
   /**
@@ -163,7 +166,7 @@ public class GuiViewModel implements ViewModel {
    * @param tempo the new tempo of the piece
    */
   @Override public void setTempo(int tempo) {
-    m.setTempo(tempo);
+    this.model.setTempo(tempo);
   }
 
   /**
@@ -172,7 +175,7 @@ public class GuiViewModel implements ViewModel {
    * @return the list of notes that should be played at the given timestamp
    */
   @Override public List<Note> getNotesAtTime(int time) {
-    return m.getNotesAtTime(time);
+    return this.model.getNotesAtTime(time);
   }
 
   /**
@@ -182,7 +185,7 @@ public class GuiViewModel implements ViewModel {
    * @return the list of notes that should be turned off at the given time
    */
   @Override public List<Note> getEndNotesAtTime(int time) {
-    return m.getEndNotesAtTime(time);
+    return this.model.getEndNotesAtTime(time);
   }
 
   /**
@@ -205,7 +208,7 @@ public class GuiViewModel implements ViewModel {
   @Override public void addNote(Pitch pitch, int startTime, int endTime, int instrument,
       int velocity) {
     try {
-      m.addNote(pitch, startTime, endTime, instrument, velocity);
+      this.model.addNote(pitch, startTime, endTime, instrument, velocity);
     } catch (Model.IllegalAddException ex) {
       //do nothing
     }
@@ -222,7 +225,7 @@ public class GuiViewModel implements ViewModel {
    *                                    there is no note at the given pitch and time.
    */
   @Override public Note getNoteAt(Pitch pitch, int time, int instrument) {
-    return m.getNoteAt(pitch, time, instrument);
+    return this.model.getNoteAt(pitch, time, instrument);
   }
 
   /**
@@ -236,7 +239,7 @@ public class GuiViewModel implements ViewModel {
    * with the given instrument
    */
   @Override public Note getNoteIn(Pitch pitch, int time, int instrument) {
-    return m.getNoteIn(pitch, time, instrument);
+    return this.model.getNoteIn(pitch, time, instrument);
   }
 
   /**
@@ -247,7 +250,7 @@ public class GuiViewModel implements ViewModel {
    * @return The Note that starts or continues at the given time played at the given pitch.
    */
   @Override public Note getNoteIn(Pitch pitch, int time) {
-    return m.getNoteIn(pitch, time);
+    return this.model.getNoteIn(pitch, time);
   }
 
   /**
@@ -260,7 +263,7 @@ public class GuiViewModel implements ViewModel {
    *                                                             given position.
    */
   @Override public void deleteNote(Pitch pitch, int time, int instrument) {
-    m.deleteNote(pitch, time, instrument);
+    this.model.deleteNote(pitch, time, instrument);
   }
 
   /**
@@ -276,7 +279,7 @@ public class GuiViewModel implements ViewModel {
    */
   @Override public void editNoteStartTime(Pitch pitch, int currentStart, int newStart,
       int instrument) {
-    m.editNoteStartTime(pitch, currentStart, newStart, instrument);
+    this.model.editNoteStartTime(pitch, currentStart, newStart, instrument);
   }
 
   /**
@@ -292,7 +295,7 @@ public class GuiViewModel implements ViewModel {
    */
   @Override public void editNoteEndTime(Pitch pitch, int currentStart, int newEnd,
       int instrument) {
-    m.editNoteEndTime(pitch, currentStart, newEnd, instrument);
+    this.model.editNoteEndTime(pitch, currentStart, newEnd, instrument);
   }
 
   /**
@@ -304,7 +307,7 @@ public class GuiViewModel implements ViewModel {
    *                 if false, add all the notes over the current notes.
    */
   @Override public void addAllNotes(List<Note> allNotes, boolean atEnd) {
-    m.addAllNotes(allNotes, atEnd);
+    this.model.addAllNotes(allNotes, atEnd);
   }
 
   /**
@@ -361,17 +364,17 @@ public class GuiViewModel implements ViewModel {
    * @param y The y coordinate of the mouse click.
    */
   public void setCurrent(int x, int y) {
-    this.curBeat = (x >= 50 && x <= (m.getFinalEndBeat() + 2) * Constants.CELL_SIZE) ?
+    this.curBeat = (x >= 50 && x <= (this.model.getFinalEndBeat() + 2) * Constants.CELL_SIZE) ?
         (x - 50) / Constants.CELL_SIZE :
         -1;
     this.curPitch =
-        (y >= 25 && y <= ((m.getHighPitch().getValue() - m.getLowPitch().getValue() + 2)
+        (y >= 25 && y <= ((this.model.getHighPitch().getValue() - this.model.getLowPitch().getValue() + 2)
             * Constants.CELL_SIZE)) ?
-            m.getHighPitch().getValue() - ((y - Constants.CELL_SIZE)
+            this.model.getHighPitch().getValue() - ((y - Constants.CELL_SIZE)
                 / Constants.CELL_SIZE) :
             -1;
     try {
-      this.curInstrument = m.getNoteIn(new PitchImpl(curPitch), curBeat).getInstrument();
+      this.curInstrument = this.model.getNoteIn(new PitchImpl(curPitch), curBeat).getInstrument();
     } catch (Model.IllegalAccessNoteException ex) {
       this.curInstrument = -1;
     }
