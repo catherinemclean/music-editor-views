@@ -107,8 +107,6 @@ public final class Controller implements MusicEditorController {
         model.setCurPitch(-1);
         model.setCurBeat(-1);
       }
-      view.render(model);
-      view.update(beat);
     }
   }
 
@@ -130,7 +128,6 @@ public final class Controller implements MusicEditorController {
           //do nothing, if no note was found
         }
       }
-      view.render(model);
     }
   }
 
@@ -150,7 +147,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
     }
   }
 
@@ -175,7 +171,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
     }
   }
 
@@ -188,10 +183,10 @@ public final class Controller implements MusicEditorController {
     public void run() {
       int pitch = model.getCurPitch();
       int beat = model.getCurBeat();
-      int instrument = model.getCurInstrument();
+      //int instrument = model.getCurInstrument();
       Note n;
       try {
-        n = model.getNoteIn(new PitchImpl(pitch), beat, instrument);
+        n = model.getNoteIn(new PitchImpl(pitch), beat);
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
         return;
@@ -199,7 +194,7 @@ public final class Controller implements MusicEditorController {
       try {
         try {
           model
-              .getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), instrument);
+              .getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), 1);
         } catch (Model.IllegalAccessNoteException ex) {
           if (pitch != 0) {
             model.addNote(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(),
@@ -211,7 +206,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
     }
   }
 
@@ -247,7 +241,6 @@ public final class Controller implements MusicEditorController {
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
       }
-      view.render(model);
     }
   }
 
@@ -282,7 +275,6 @@ public final class Controller implements MusicEditorController {
 
     public void run() {
       playing = true;
-      view.render(model);
     }
 
   }
