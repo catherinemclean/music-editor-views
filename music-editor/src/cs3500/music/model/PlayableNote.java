@@ -17,7 +17,7 @@ public class PlayableNote implements Playable {
   }
 
   @Override public int getEnd() {
-    return note.getEndTime();
+    return note.getEndTime() - 1;
   }
 
   @Override public int getPitch() {
