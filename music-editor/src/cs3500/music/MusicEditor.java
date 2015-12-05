@@ -48,16 +48,16 @@ public final class MusicEditor {
       }
     }
 
-    MusicEditorView v = new ViewBuilderImpl().setModel(m).setView(args[1]).build();
-    v.render(m);
+   // MusicEditorView v = new ViewBuilderImpl().setModel(m).setView(args[1]).build();
+    //v.render(m);
 
 
 
 
      //Initializes the controller for our composite view.
-    //Controller controller = new Controller(m);
+    Controller controller = new Controller(m);
 
     // runs the view
-    //controller.initialize();
+    controller.initialize();
   }
 }

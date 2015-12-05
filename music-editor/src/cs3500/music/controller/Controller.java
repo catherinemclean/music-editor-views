@@ -25,13 +25,13 @@ public final class Controller implements MusicEditorController {
   /**
    * The model that our composite view will work with.
    */
-  private final cs3500.music.model.ViewModel model;
+  private final ViewModel model;
 
   /**
    * The timer that will schedule all of our tasks, such as recording notes
    * to be played.
    */
-  public static Timer timer;
+  public static Timer timer = new Timer();
 
   /**
    * Represents whether or not this view is currently in playback mode.
@@ -52,7 +52,7 @@ public final class Controller implements MusicEditorController {
     this.model = new GuiViewModel(m);
     this.view = new CompositeView(new SwingView(), new MIDIView());
     this.kh = new KeyboardHandler();
-    this.timer = new Timer();
+    //this.timer = new Timer();
     this.playing = false;
 
     // record the next few notes to be played
@@ -90,6 +90,7 @@ public final class Controller implements MusicEditorController {
    */
   public void initialize() throws InvalidMidiDataException {
     this.view.render(model);
+    this.playing = true;
   }
 
   /**
@@ -106,6 +107,7 @@ public final class Controller implements MusicEditorController {
         model.setCurBeat(-1);
       }
       view.render(model);
+      view.update(beat);
     }
   }
 
@@ -255,8 +257,11 @@ public final class Controller implements MusicEditorController {
   public class Record extends TimerTask {
 
     public void run() {
+      System.out.println("timer\n");
       if (playing && model.getTimeStamp() < model.getFinalEndBeat()) {
         view.render(model);
+        view.update(model.getTimeStamp());
+        model.advanceTimestamp();
         /*try {
           view.recordNotes(model.getTimeStamp());
         } catch (InvalidMidiDataException e) {

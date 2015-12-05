@@ -2,6 +2,7 @@ package cs3500.music.util;
 
 import cs3500.music.model.*;
 import cs3500.music.view.*;
+import cs3500.music.view.compositeui.CompositeView;
 import cs3500.music.view.consoleui.ConsoleView;
 import cs3500.music.view.midiui.MIDIView;
 import cs3500.music.view.swingview.SwingView;
@@ -65,9 +66,9 @@ public final class ViewBuilderImpl implements ViewBuilder {
       case "midi":
         this.v = new MIDIView();
         return this;
-      /*case "composite":
-        this.v = new CompositeView(new MidiViewImpl(m), new GuiViewFrame(new GuiViewModel(m)));
-        return this;*/
+      case "composite":
+        this.v = new CompositeView(new SwingView(), new MIDIView());
+        return this;
       default:
         throw new IllegalArgumentException("Invalid view");
     }
