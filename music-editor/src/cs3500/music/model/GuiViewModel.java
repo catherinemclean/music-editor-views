@@ -117,7 +117,7 @@ public class GuiViewModel implements ViewModel {
 
 
   @Override public int getLastBeat() {
-    return 0;
+    return model.getLastBeat();
   }
 
   /**

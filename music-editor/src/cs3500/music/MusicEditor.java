@@ -41,23 +41,28 @@ public final class MusicEditor {
     // Reads and parses the file and saves the info to the model
     BufferedReader f = new BufferedReader(new FileReader(file));
     MusicEditorModel m = MusicReader.parseFile(f, new MusicModelBuilder());
-    for (int i = 0; i < 64; i++) {
-      for (Playable p : m.getPlayablesAt(i)) {
-        System.out.println("Pitch: " + p.getPitch() + "  start: " + p.getStart() +
-        "  end: " + p.getEnd());
-      }
-    }
+
+    System.out.println(m.getHighestPitch());
+    System.out.println(m.getLastBeat());
 
     MusicEditorView v = new ViewBuilderImpl().setModel(m).setView(args[1]).build();
-    v.render(m);
+    /*for (int i = 0; i < 644; i++) {
+      v.render(m);
+      try {
+        Thread.sleep(m.getTempo() / 1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }*/
+    //v.render(m);
 
 
 
 
-     //Initializes the controller for our composite view.
+    //Initializes the controller for our composite view.
     Controller controller = new Controller(m);
 
     // runs the view
-    //controller.initialize();
+    controller.initialize();
   }
 }
