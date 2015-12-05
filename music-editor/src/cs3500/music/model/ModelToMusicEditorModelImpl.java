@@ -35,12 +35,12 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
 
   @Override
   public int getLowestPitch() {
-    return this.model.getLowestPitch().getValue();
+    return this.model.getLowPitch().getValue();
   }
 
   @Override
   public int getHighestPitch() {
-    return this.model.getLowestPitch().getValue();
+    return this.model.getLowPitch().getValue();
   }
 
   @Override

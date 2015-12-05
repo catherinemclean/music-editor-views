@@ -94,7 +94,7 @@ public final class ModelImpl implements Model {
    * @return the lowest pitch
    * @throws cs3500.music.model.Model.IllegalAccessNoteException if the lowest pitch is null
    */
-  public Pitch getLowestPitch() {
+  public Pitch getLowPitch() {
     return new PitchImpl(this.lowestPitch.getValue());
   }
 
@@ -113,7 +113,7 @@ public final class ModelImpl implements Model {
    * @return the highest pitch
    * @throws cs3500.music.model.Model.IllegalAccessNoteException if this.highestPitch is null
    */
-  public Pitch getHighestPitch() {
+  public Pitch getHighPitch() {
     return new PitchImpl(this.highestPitch.getValue());
   }
 
@@ -215,10 +215,10 @@ public final class ModelImpl implements Model {
       throw new IllegalArgumentException("These are not valid inputs");
     }
     if (this.lowestPitch == null || lowestPitch.getValue() == -1 ||
-        pitch.getValue() < this.getLowestPitch().getValue()) {
+        pitch.getValue() < this.getLowPitch().getValue()) {
       this.lowestPitch = new PitchImpl(pitch.getValue());
     }
-    if (this.highestPitch == null || pitch.getValue() > this.getHighestPitch().getValue()) {
+    if (this.highestPitch == null || pitch.getValue() > this.getHighPitch().getValue()) {
       this.highestPitch = new PitchImpl(pitch.getValue());
     }
     if (startTime > this.getFinalStartBeat()) {
@@ -360,10 +360,10 @@ public final class ModelImpl implements Model {
         while (iter.hasNext()) {
           Note n = iter.next();
           if (this.lowestPitch == null || this.lowestPitch.getValue() == -1 ||
-              n.getPitch().getValue() < this.getLowestPitch().getValue()) {
+              n.getPitch().getValue() < this.getLowPitch().getValue()) {
             this.lowestPitch = n.getPitch();
           }
-          if (this.highestPitch == null || n.getPitch().getValue() > this.getHighestPitch()
+          if (this.highestPitch == null || n.getPitch().getValue() > this.getHighPitch()
               .getValue()) {
             this.highestPitch = n.getPitch();
           }
@@ -483,7 +483,7 @@ public final class ModelImpl implements Model {
   @Override public String toString() {
     String acc = String
         .format("Measure: %d\n Low Pitch: %d\n High Pitch: %d\n finalStartBeat: %d\n",
-            this.getMeasure(), this.getLowestPitch().getValue(), this.getHighestPitch().getValue(),
+            this.getMeasure(), this.getLowPitch().getValue(), this.getHighPitch().getValue(),
             this.getFinalStartBeat());
     for (int i = 0; i <= this.getFinalStartBeat(); i++) {
       if (this.musicSheet.containsKey(i)) {
