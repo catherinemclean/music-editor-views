@@ -6,10 +6,6 @@ import cs3500.music.model.MusicEditorModel;
  * An interface to view MusicEditorModels
  */
 public interface MusicEditorView {
-  /**
-   * Draw the entire model
-   *
-   * @param model the model to render
-   */
+  /** Draws the entire model */
   void render(MusicEditorModel model);
 }

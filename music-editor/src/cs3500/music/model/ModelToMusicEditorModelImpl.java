@@ -3,7 +3,7 @@ package cs3500.music.model;
 import java.util.*;
 
 /**
- * Created by catherinemclean1 on 12/4/15.
+ * Created by catherinemclan1 on 12/4/15.
  */
 public class ModelToMusicEditorModelImpl implements MusicEditorModel {
 
@@ -186,7 +186,7 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    *                                          at the given pitch, time, instrument
    */
   @Override public Note getNoteIn(Pitch pitch, int time, int instrument) {
-    return null;
+    return this.model.getNoteIn(pitch, time, instrument);
   }
 
   /**

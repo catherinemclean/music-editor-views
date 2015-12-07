@@ -17,6 +17,7 @@ public class CompositeView implements GuiView {
   MIDIView midiView;
   MusicEditorModel model;
 
+  /** Construct a new CompositeView with the given SwingView and MIDIView */
   public CompositeView(SwingView swingView, MIDIView midiView) {
     this.swingView = swingView;
     this.midiView = midiView;
@@ -28,9 +29,30 @@ public class CompositeView implements GuiView {
     this.swingView.render(model);
   }
 
+  @Override
   public void update(int beat) {
     this.swingView.update(beat);
     this.midiView.render(model);
+  }
+
+  @Override
+  public void scrollLeft() {
+    this.swingView.scrollLeft();
+  }
+
+  @Override
+  public void scrollRight() {
+    this.swingView.scrollRight();
+  }
+
+  @Override
+  public void scrollUp() {
+    this.swingView.scrollUp();
+  }
+
+  @Override
+  public void scrollDown() {
+    this.swingView.scrollDown();
   }
 
   @Override
@@ -46,11 +68,6 @@ public class CompositeView implements GuiView {
   @Override
   public void addMouseListener(MouseListener mouseHandler) {
     this.swingView.addMouseListener(mouseHandler);
-  }
-
-  @Override
-  public void addMouseMotionListener(MouseMotionListener mouseHandler) {
-    this.swingView.addMouseMotionListener(mouseHandler);
   }
 
   @Override

@@ -58,7 +58,7 @@ public final class Controller implements MusicEditorController {
     this.playing = false;
 
     // record the next few notes to be played
-    int t = model.getTempo() / 500;
+    int t = model.getTempo() / 1000;
     timer.schedule(new Record(), 0, t);
 
     // Ads our key events to our key handler
@@ -357,10 +357,10 @@ public final class Controller implements MusicEditorController {
         }
       } catch (Model.IllegalAddException ex) {
         //do nothing
-        return;
+        //return;
       } catch (IllegalArgumentException ex) {
         //do nothing
-        return;
+        //return;
       }
     }
   }
