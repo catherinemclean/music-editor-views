@@ -8,20 +8,30 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.*;
 
 import cs3500.music.model.MusicEditorModel;
-import cs3500.music.model.Tone;
 import cs3500.music.util.MouseHandler;
 import cs3500.music.view.Constants;
 import cs3500.music.view.GuiView;
 
 /**
- * A skeleton Frame (i.e., a window) in Swing
+ * A view for MusicEditorModels that renders all the playables in the model on a grid, according
+ * to each playable's respective pitch and beat, with pitches as the Y-Axis and beats as the
+ * X-Axis.
  */
 public class SwingView extends JFrame implements GuiView {
+  private JPanel root = new JPanel(new BorderLayout(2, 0));
   private JScrollPane scrollPane;
-  private JPanel root = new JPanel(new BorderLayout());
   private JFrame frame = new JFrame("Jav-insky");
   private MusicEditorModel model;
   static int currBeat = 0;
+
+  /**
+   * Constructs a SwingView, sets the default close operation to exit, and the maximum size
+   * to be the size of the screen
+   */
+  public SwingView() {
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    frame.setMaximumSize(new Dimension(Constants.MAX_WINDOW_WIDTH, Constants.MAX_WINDOW_HEIGHT));
+  }
 
   @Override
   public void render(MusicEditorModel model) {
@@ -37,41 +47,59 @@ public class SwingView extends JFrame implements GuiView {
     }
   }
 
+  @Override
+  public void scrollLeft() {
+    int hScrollVal = this.scrollPane.getHorizontalScrollBar().getValue();
+    this.scrollPane.getHorizontalScrollBar().setValue(hScrollVal - Constants.CELL_SIZE);
+  }
+
+  @Override
+  public void scrollRight() {
+    int hScrollVal = this.scrollPane.getHorizontalScrollBar().getValue();
+    this.scrollPane.getHorizontalScrollBar().setValue(hScrollVal + Constants.CELL_SIZE);
+  }
+
+  @Override
+  public void scrollUp() {
+    int hScrollVal = this.scrollPane.getVerticalScrollBar().getValue();
+    this.scrollPane.getVerticalScrollBar().setValue(hScrollVal - Constants.CELL_SIZE);
+  }
+
+  @Override
+  public void scrollDown() {
+    int hScrollVal = this.scrollPane.getVerticalScrollBar().getValue();
+    this.scrollPane.getVerticalScrollBar().setValue(hScrollVal + Constants.CELL_SIZE);
+  }
+
+  /** Draws all components of the GUI, including all the playables, the pitches, and the beats */
   private void createAndShowGUI() {
-    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    frame.setMaximumSize(new Dimension(Constants.MAX_WINDOW_WIDTH, Constants.MAX_WINDOW_HEIGHT));
-
     GridOfPlayablesPanel playablesPanel = new GridOfPlayablesPanel(model);
-    Box pitchesPanel = drawPitches();
-    Box timesBox = drawTimes();
+    PitchesPanel pitches = new PitchesPanel(model);
+    Box timesBox = createBeatsBox();
 
-    this.root.add(pitchesPanel, BorderLayout.WEST);
-    this.root.add(timesBox, BorderLayout.NORTH);
-    this.root.add(playablesPanel, BorderLayout.CENTER);
+    playablesPanel.setBackground(Constants.BACKGROUND_COLOR);
+    pitches.setBackground(Constants.BACKGROUND_COLOR);
+    timesBox.setBackground(Constants.BACKGROUND_COLOR);
 
+    this.root.add(playablesPanel);
     this.scrollPane = new JScrollPane(root);
-    this.scrollPane.getVerticalScrollBar().setUnitIncrement(4);
-    this.scrollPane.getHorizontalScrollBar().setUnitIncrement(4);
+
+    this.scrollPane.setColumnHeaderView(timesBox);
+    this.scrollPane.setRowHeaderView(pitches);
+
+    this.scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+    this.scrollPane.getHorizontalScrollBar().setUnitIncrement(16);
 
     frame.add(this.scrollPane);
+
     frame.pack();
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
   }
 
-  private Box drawPitches() {
-    Box pitches = Box.createVerticalBox();
-    for (int i = model.getHighestPitch(); i >= model.getLowestPitch(); i--) {
-      JLabel label = new JLabel(Tone.pitchNumToString(i));
-      pitches.add(Box.createVerticalStrut(Constants.CELL_SIZE / 5));
-      pitches.add(label);
-    }
-    return pitches;
-  }
-
-  private Box drawTimes() {
+  /** Creates a Horizontal Box containing beats spaced 16 beats apart*/
+  private Box createBeatsBox() {
     Box times = Box.createHorizontalBox();
-    times.add(Box.createHorizontalStrut(27));
     for (int i = 0; i <= model.getLastBeat(); i++) {
       if (i % 16 == 0) {
         Box labelBox = Box.createHorizontalBox();
@@ -104,19 +132,8 @@ public class SwingView extends JFrame implements GuiView {
     this.root.addMouseListener(mouseHandler);
   }
 
-  public void addMouseMotionListener(MouseMotionListener mouseHandler) {
-    this.root.addMouseMotionListener(mouseHandler);
-  }
-
-  public void removeMouseListener(MouseHandler mouseHandler) {
+  @Override
+  public void removeMouseListener(MouseListener mouseHandler) {
     this.root.removeMouseListener(mouseHandler);
-  }
-
-  public KeyListener getKeyListener() {
-    return this.getKeyListeners()[0];
-  }
-
-  public MouseListener getMouseListener() {
-    return this.getMouseListeners()[0];
   }
 }

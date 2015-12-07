@@ -5,13 +5,12 @@ import java.util.Set;
 import cs3500.music.model.MusicEditorModel;
 import cs3500.music.model.Playable;
 
-/**
- * A ViewModel for MusicEditor Models that has read-only .
- */
+/** A concrete implementation of a ViewModel. Allows for read-only access to the
+ * MusicEditorModel that it is constructed with. */
 public class ViewModelImpl implements ViewModel {
   private final MusicEditorModel model;
 
-
+  /** Creates a concrete ViewModel instance with the given model */
   public ViewModelImpl(MusicEditorModel model) {
     this.model = model;
   }

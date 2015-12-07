@@ -9,12 +9,13 @@ import cs3500.music.model.Playable;
 import cs3500.music.view.Constants;
 
 /**
- * A dummy view that simply draws a string
+ * A Panel that knows how to draw a grid of playables
  */
 public final class GridOfPlayablesPanel extends JPanel {
   private final MusicEditorModel model;
   private PlayableView playableView = new PlayableView();
 
+  /** Construct a new GridOfPlayablesPanel with the given model*/
   public GridOfPlayablesPanel(MusicEditorModel model) {
     this.model = model;
   }
@@ -29,6 +30,7 @@ public final class GridOfPlayablesPanel extends JPanel {
     this.repaint();
   }
 
+  /** Paint all the playables in the model over the given graphics object */
   private void paintPlayables(Graphics g) {
     super.paintComponent(g);
 
@@ -42,6 +44,7 @@ public final class GridOfPlayablesPanel extends JPanel {
     }
   }
 
+  /** Paint the lines over */
   private void paintGrid(Graphics g) {
     g.setColor(Constants.GRID_COLOR);
     // Horizontal Lines
@@ -65,9 +68,16 @@ public final class GridOfPlayablesPanel extends JPanel {
     }
   }
 
+  /** Draws a red line at the given beat */
   private void drawLine(Graphics g, int beat) {
     g.setColor(Color.RED);
     g.drawLine(beat * Constants.CELL_SIZE, 0, beat * Constants.CELL_SIZE,
-        model.getHighestPitch() * Constants.CELL_SIZE);
+        (model.getHighestPitch() - model.getLowestPitch() + 1) * Constants.CELL_SIZE);
+  }
+
+  @Override
+  public Dimension getPreferredSize() {
+    return new Dimension(model.getLastBeat() * Constants.CELL_SIZE,
+        (model.getHighestPitch() - model.getLowestPitch() + 1) * Constants.CELL_SIZE);
   }
 }

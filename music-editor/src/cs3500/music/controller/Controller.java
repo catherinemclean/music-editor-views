@@ -307,7 +307,7 @@ public final class Controller implements MusicEditorController {
             model.addNote(new PitchImpl(pitch), n.getStartTime() - 1, n.getEndTime() - 1,
                 n.getInstrument(), n.getVelocity());
             model.setCurBeat(n.getEndTime() - 2);
-            view.render(model);
+            //view.render(model);
           }
         }
       } catch (Model.IllegalAddException ex) {
@@ -344,14 +344,14 @@ public final class Controller implements MusicEditorController {
           model.addNote(new PitchImpl(pitch), n.getStartTime() + 1, n.getEndTime() + 1,
               n.getInstrument(), n.getVelocity());
           model.setCurBeat(n.getEndTime());
-          view.render(model);
+          //view.render(model);
         }
       } catch (Model.IllegalAddException ex) {
         //do nothing
-        return;
+        //return;
       } catch (IllegalArgumentException ex) {
         //do nothing
-        return;
+        //return;
       }
     }
   }
