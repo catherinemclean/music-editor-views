@@ -183,10 +183,10 @@ public final class Controller implements MusicEditorController {
     public void run() {
       int pitch = model.getCurPitch();
       int beat = model.getCurBeat();
-      //int instrument = model.getCurInstrument();
+      int instrument = model.getCurInstrument();
       Note n;
       try {
-        n = model.getNoteIn(new PitchImpl(pitch), beat);
+        n = model.getNoteIn(new PitchImpl(pitch), beat, instrument);
       } catch (Model.IllegalAccessNoteException ex) {
         //do nothing
         return;
@@ -194,7 +194,7 @@ public final class Controller implements MusicEditorController {
       try {
         try {
           model
-              .getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), 1);
+              .getNoteAt(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(), instrument);
         } catch (Model.IllegalAccessNoteException ex) {
           if (pitch != 0) {
             model.addNote(new PitchImpl(n.getPitch().getValue() - 1), n.getStartTime(),
@@ -255,14 +255,6 @@ public final class Controller implements MusicEditorController {
         //view.render(model);
         view.update(model.getTimeStamp());
         model.advanceTimestamp();
-        /*try {
-          view.recordNotes(model.getTimeStamp());
-        } catch (InvalidMidiDataException e) {
-          e.printStackTrace();
-        } catch (MidiUnavailableException e) {
-          e.printStackTrace();
-        }
-        model.advanceTimestamp();*/
       }
     }
   }
@@ -286,7 +278,6 @@ public final class Controller implements MusicEditorController {
   public class Pause implements Runnable {
     public void run() {
       playing = false;
-      //view.pause();
     }
   }
 

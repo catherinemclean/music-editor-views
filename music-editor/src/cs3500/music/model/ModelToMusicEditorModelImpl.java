@@ -186,7 +186,8 @@ public class ModelToMusicEditorModelImpl implements MusicEditorModel {
    *                                          at the given pitch, time, instrument
    */
   @Override public Note getNoteIn(Pitch pitch, int time, int instrument) {
-    return null;
+
+    return this.model.getNoteIn(pitch, time, instrument);
   }
 
   /**
