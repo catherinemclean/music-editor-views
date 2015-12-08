@@ -77,7 +77,7 @@ public final class Controller implements MusicEditorController {
     this.kh.addPressedEvent(38, new MoveScreenUp()); //   'up'
     this.kh.addPressedEvent(39, new MoveScreenRight()); //'right'
     this.kh.addPressedEvent(40, new MoveScreenDown()); // 'down
-   /* this.kh.addTypedEvent(71, new ToEnd()); //            'g'
+    /*this.kh.addTypedEvent(71, new ToEnd()); //            'g'
     this.kh.addTypedEvent(72, new ToHome()); //           'h'
     this.kh.addTypedEvent(84, kh.new TestKeyHandler());// 't'*/
 
@@ -104,8 +104,8 @@ public final class Controller implements MusicEditorController {
       int beat = model.getCurBeat();
       if (beat != -1 && pitch != -1) {
         model.addNote(new PitchImpl(pitch), beat, beat + 2, 1, 80);
-        model.setCurPitch(-1);
-        model.setCurBeat(-1);
+        //model.setCurPitch(-1);
+        //model.setCurBeat(-1);
       }
     }
   }
@@ -124,6 +124,8 @@ public final class Controller implements MusicEditorController {
           Note n = model.getNoteIn(new PitchImpl(pitch), beat);
           model.deleteNote(n.getPitch(), n.getStartTime(), n.getInstrument());
           model.setCurBeat(-1);
+          model.setCurPitch(-1);
+          model.setCurInstrument(-1);
         } catch (Model.IllegalAccessNoteException e) {
           //do nothing, if no note was found
         }
@@ -360,7 +362,7 @@ public final class Controller implements MusicEditorController {
   /**
    * Jumps this piece to the very first beat.
    */
- /* public class ToHome implements Runnable {
+  /*public class ToHome implements Runnable {
     public void run() {
       playing = false;
       view.skipToFront();
