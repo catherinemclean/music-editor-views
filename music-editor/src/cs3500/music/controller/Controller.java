@@ -255,14 +255,6 @@ public final class Controller implements MusicEditorController {
         //view.render(model);
         view.update(model.getTimeStamp());
         model.advanceTimestamp();
-        /*try {
-          view.recordNotes(model.getTimeStamp());
-        } catch (InvalidMidiDataException e) {
-          e.printStackTrace();
-        } catch (MidiUnavailableException e) {
-          e.printStackTrace();
-        }
-        model.advanceTimestamp();*/
       }
     }
   }
@@ -286,7 +278,6 @@ public final class Controller implements MusicEditorController {
   public class Pause implements Runnable {
     public void run() {
       playing = false;
-      //view.pause();
     }
   }
 
