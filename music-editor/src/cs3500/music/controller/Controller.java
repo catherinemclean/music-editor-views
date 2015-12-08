@@ -73,11 +73,11 @@ public final class Controller implements MusicEditorController {
     this.kh.addTypedEvent(47, new Pause()); //            '/'
     this.kh.addTypedEvent(77, new MoveNoteRight()); //    'm'
     this.kh.addTypedEvent(78, new MoveNoteLeft()); //     'n'
-   /* this.kh.addPressedEvent(37, new MoveScreenLeft()); // 'left'
+    this.kh.addPressedEvent(37, new MoveScreenLeft()); // 'left'
     this.kh.addPressedEvent(38, new MoveScreenUp()); //   'up'
     this.kh.addPressedEvent(39, new MoveScreenRight()); //'right'
     this.kh.addPressedEvent(40, new MoveScreenDown()); // 'down
-    this.kh.addTypedEvent(71, new ToEnd()); //            'g'
+   /* this.kh.addTypedEvent(71, new ToEnd()); //            'g'
     this.kh.addTypedEvent(72, new ToHome()); //           'h'
     this.kh.addTypedEvent(84, kh.new TestKeyHandler());// 't'*/
 
@@ -385,21 +385,21 @@ public final class Controller implements MusicEditorController {
   /**
    * Shift the viewable range of this piece to the left.
    */
- /* public class MoveScreenLeft implements Runnable {
+  public class MoveScreenLeft implements Runnable {
 
     public void run() {
-      view.shiftLeft();
+      view.scrollLeft();
     }
-  }*/
+  }
 
 
   /**
    * Shift the viewable range of this piece to the right.
    */
- /* public class MoveScreenRight implements Runnable {
+  public class MoveScreenRight implements Runnable {
 
     public void run() {
-      view.shiftRight();
+      view.scrollRight();
     }
   }
 
@@ -407,10 +407,10 @@ public final class Controller implements MusicEditorController {
   /**
    * Shift the viewable range of this piece up.
    */
- /* public class MoveScreenUp implements Runnable {
+  public class MoveScreenUp implements Runnable {
 
     public void run() {
-      view.shiftUp();
+      view.scrollUp();
     }
   }
 
@@ -418,10 +418,10 @@ public final class Controller implements MusicEditorController {
   /**
    * Shift the viewable range of this piece down.
    */
- /* public class MoveScreenDown implements Runnable {
+  public class MoveScreenDown implements Runnable {
 
     public void run() {
-      view.shiftDown();
+      view.scrollDown();
     }
-  }*/
+  }
 }
