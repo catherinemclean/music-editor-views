@@ -386,12 +386,12 @@ public class GuiViewModel implements ViewModel {
    * @param y The y coordinate of the mouse click.
    */
   public void setCurrent(int x, int y) {
-    this.curBeat = (x >= Constants.CELL_SIZE && x <= (this.model.getFinalEndBeat() + 2)
-        * Constants.CELL_SIZE) ? (x) / Constants.CELL_SIZE : -1;
+    this.curBeat = (x >= 0 && x <= (this.model.getFinalEndBeat() + 2)
+        * Constants.CELL_SIZE) ? x / Constants.CELL_SIZE : -1;
     this.curPitch =
-        (y >= Constants.CELL_SIZE && y <= ((this.model.getHighPitch().getValue() -
+        (y >= 0 && y <= ((this.model.getHighPitch().getValue() -
             this.model.getLowPitch().getValue() + 2) * Constants.CELL_SIZE)) ?
-            this.model.getHighPitch().getValue() - ((y)
+            this.model.getHighPitch().getValue() - (y
                 / Constants.CELL_SIZE) : -1;
     try {
       this.curInstrument = this.model.getNoteIn(new PitchImpl(curPitch), curBeat).getInstrument();
