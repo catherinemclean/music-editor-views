@@ -1,16 +1,23 @@
 package cs3500.music.model;
 
 /**
- * Created by catherinemclean1 on 12/4/15.
+ * An adapter from Notes to Playables.
  */
 public class PlayableNote implements Playable {
 
+  /**
+   * The note to adapt
+   */
   private final Note note;
 
+  /**
+   * Constructs a new PlayableNote with the given Note
+   *
+   * @param note the note to adapt
+   */
   public PlayableNote(Note note) {
     this.note = note;
   }
-
 
   @Override public int getStart() {
     return note.getStartTime();

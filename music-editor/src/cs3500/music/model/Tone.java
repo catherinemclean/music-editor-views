@@ -1,9 +1,10 @@
 package cs3500.music.model;
 
 /**
- * Created by catherinemclean1 on 12/4/15.
+ * A utility class to convert pitches to strings
  */
 public class Tone {
+
   public static String pitchNumToString(int pitch) {
     String result = "";
     int octave = (pitch / 12) - 1;

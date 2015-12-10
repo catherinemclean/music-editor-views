@@ -3,7 +3,7 @@ package cs3500.music.model;
 import java.util.Set;
 
 /**
- * Created by catherinemclean1 on 12/4/15.
+ * Represents a MusicEditorModel that works with the new views
  */
 public interface MusicEditorModel extends Model {
 

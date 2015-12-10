@@ -54,7 +54,6 @@ public final class Controller implements MusicEditorController {
     this.view = new CompositeView(new SwingView(), new MIDIView());
     this.view.addMouseListener(new MouseHandler(model));
     this.kh = new KeyboardHandler();
-    //this.timer = new Timer();
     this.playing = false;
 
     // record the next few notes to be played
@@ -104,8 +103,6 @@ public final class Controller implements MusicEditorController {
       int beat = model.getCurBeat();
       if (beat != -1 && pitch != -1) {
         model.addNote(new PitchImpl(pitch), beat, beat + 2, 1, 80);
-        //model.setCurPitch(-1);
-        //model.setCurBeat(-1);
       }
     }
   }

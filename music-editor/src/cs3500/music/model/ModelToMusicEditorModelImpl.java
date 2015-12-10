@@ -3,12 +3,20 @@ package cs3500.music.model;
 import java.util.*;
 
 /**
- * Created by catherinemclan1 on 12/4/15.
+ * An adapter from Model to MusicEditorModel
  */
 public class ModelToMusicEditorModelImpl implements MusicEditorModel {
 
+  /**
+   * The model that we will delegate to.
+   */
   private final Model model;
 
+  /**
+   * Constructs a ModelToMusicEditorModelImpl with the given model
+   *
+   * @param model the model to adapt around
+   */
   public ModelToMusicEditorModelImpl(Model model) {
     this.model = model;
   }
